@@ -1,8 +1,7 @@
 #include "Sinal.h"
-int Sinal::max = 60;
 
 Sinal::Sinal(double *sequencia, int comprimento): comprimento(comprimento){
-
+    this->sequencia = new double[comprimento];
     for(int i=0; i<comprimento; i++){
         this->sequencia[i] = sequencia[i];
     }
@@ -18,6 +17,12 @@ int Sinal::getComprimento(){
 }
 
 void Sinal::imprimir(string nomeDoSinal){
+    Grafico *g = new Grafico(nomeDoSinal, sequencia, comprimento);
+    g->plot();
+    g->~Grafico();
+    
+}
 
-    //implementar
+Sinal::~Sinal(){
+    delete[] sequencia;
 }
