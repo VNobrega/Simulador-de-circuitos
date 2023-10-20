@@ -5,7 +5,7 @@
 
 class Amplificador{
 private:
-    
+    double ganho;
 
 public:
     Amplificador(double ganho); 
