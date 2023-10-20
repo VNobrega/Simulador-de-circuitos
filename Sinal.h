@@ -7,7 +7,7 @@ using namespace std;
 class Sinal{
 private:
     static int max;
-    double *sequencia = new double(max);
+    double *sequencia = new double[max];
     int comprimento;
 
 public:
