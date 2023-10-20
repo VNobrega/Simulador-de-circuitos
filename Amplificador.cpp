@@ -5,10 +5,13 @@ Amplificador::Amplificador(double ganho): ganho(ganho){
 }
 
 Sinal* Amplificador::processar(Sinal* sinalIN){
-    for(int i=0; i<sinalIN->getComprimento(); i++){
-        sinalIN[i] *= ganho;
+    int comprimento = sinalIN->getComprimento();
+    double *sequencia = double[comprimento];
+    Sinal sinalA = new Sinal(sequencia,comprimento);
+    for(int i = 0; i < comprimento; i++){
+        sinalA[i] = sinalIN[i] * ganho;
     }
-    return sinalIN;
+    return sinalA;
 }
 
 void Amplificador::setGanho(double ganho){
