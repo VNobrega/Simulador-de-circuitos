@@ -9,20 +9,22 @@ using namespace std;
 
 Sinal* novoSinal();
 
+void novaOperacao(Sinal *sinalIN);
+
 void menu(){
-    int escolha1,escolha2;
-    double c,g;
+    int escolha;
 
     cout << "       Simulink em C++" << endl 
     << "Qual simulacao voce gostaria de fazer?" << endl
     << "1) Piloto Automatico" << endl
     << "2) Sua propria sequencia de operacoes" << endl
     << "Escolha: ";
-    cin >> escolha1;
+    cin >> escolha;
     cout << endl;
 
-    if(escolha1 == 1){
-        Sinal* sinal = novoSinal();
+    if(escolha == 1){
+        double g;
+        Sinal* sinalIN = novoSinal();
 
         cout << "Qual o ganho do acelerador?" << endl
         << "g = ";
@@ -30,32 +32,35 @@ void menu(){
         cout << endl;
 
         ModuloRealimentado* pilotoAutomatico = new ModuloRealimentado(g);
-        (pilotoAutomatico->processar(sinal))->imprimir("Velocidade do Carro");
+        (pilotoAutomatico->processar(sinalIN))->imprimir("Velocidade do Carro");
     }
 
-    if(escolha1 == 2) {
-
+    if(escolha == 2) {
+        Sinal* sinalIN = novoSinal();
+        novaOperacao(sinalIN);
     }
 }
 
 Sinal* novoSinal(){
     double sequencia[MAX];
-    int escolha2;
+    int escolha;
+
     cout << "Qual sinal voce gostaria de utilizar como entrada da sua simulacao?" << endl
     << "1) 5+3*cos(n*pi/8)" << endl
     << "2) constante" << endl
     << "3) rampa" << endl
     << "Escolha: ";
-    cin >> escolha2;
+    cin >> escolha;
     cout << endl;
 
-    if(escolha2 == 1) {
+    if(escolha == 1) {
         for(int i = 0; i < MAX; i++)
             sequencia[i] = 5+3*cos(i*PI/8);
     }
 
-    if(escolha2 == 2) {
+    if(escolha == 2) {
         double c;
+
         cout << "Qual o valor dessa constante?" << endl
         << "C = ";
         cin >> c;
@@ -65,8 +70,9 @@ Sinal* novoSinal(){
             sequencia[i] = c;
     }
 
-    if(escolha2 == 3) {
+    if(escolha == 3) {
         double a;
+
         cout << "Qual a inclinacao dessa rampa?" << endl
         << "a = ";
         cin >> a;
@@ -75,6 +81,22 @@ Sinal* novoSinal(){
         for(int i = 0; i < MAX; i++)
             sequencia[i] = i*a;
     }
-    Sinal* sinal = new Sinal(sequencia,MAX);
-    return sinal;
+    Sinal* sinalOUT = new Sinal(sequencia,MAX);
+    return sinalOUT;
+}
+
+void novaOperacao(Sinal *sinalIN){
+    int escolha1,escolha2;
+
+        cout << "Qual operacao voce gostaria de fazer?" << endl
+        << "1) Amplificar" << endl
+        << "2) Somar" << endl
+        << "3) Derivar" << endl
+        << "4) Integrar" << endl
+        << "Escolha: ";
+        cin >> escolha1;
+
+        if(escolha1 == 1) {
+
+        }
 }
