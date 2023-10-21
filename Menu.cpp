@@ -121,6 +121,16 @@ void novaOperacao(Sinal *sinalIN){
         sinalIN = somador->processar(sinalIN, sinalIN2);
     }
 
+    if(escolha1 == 3) {
+        Derivador* derivador = new Derivador();
+        sinalIN = derivador->processar(sinalIN);
+    }
+
+    if(escolha1 == 4) {
+        Integrador* integrador = new Integrador();
+        sinalIN = integrador->processar(sinalIN);
+    }
+
     cout << "O que voce quer fazer agora?" << endl
     << "1) Realizar mais uma operacao no resultado" << endl
     << "2) Imprimir o resultado para terminar" << endl
