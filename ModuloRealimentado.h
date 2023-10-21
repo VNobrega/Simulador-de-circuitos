@@ -5,7 +5,7 @@
 
 class ModuloRealimentado{
 private:
-    
+    double ganho;
 
 public:
     ModuloRealimentado(double ganho);
