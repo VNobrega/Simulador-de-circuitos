@@ -5,7 +5,8 @@
 
 class Piloto{
 private:
-    
+    Sinal* sinalOUT;
+    double ganho;
 
 public:
     Piloto(double ganho);
