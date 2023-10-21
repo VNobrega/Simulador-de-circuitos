@@ -5,7 +5,8 @@
 
 class Integrador{
 private:
-    
+    Sinal* sinalOUT;
+
 public:
     Integrador();
     virtual ~Integrador();
@@ -13,7 +14,6 @@ public:
 
 
 };
-
 
 
 #endif
