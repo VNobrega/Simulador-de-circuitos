@@ -66,7 +66,14 @@ Sinal* novoSinal(){
     }
 
     if(escolha2 == 3) {
+        double a;
+        cout << "Qual a inclinacao dessa rampa?" << endl
+        << "a = ";
+        cin >> a;
+        cout << endl;
 
+        for(int i = 0; i < MAX; i++)
+            sequencia[i] = i*a;
     }
     Sinal* sinal = new Sinal(sequencia,MAX);
     return sinal;
