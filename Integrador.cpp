@@ -1,11 +1,11 @@
 #include "Integrador.h"
 
-Integrador::Integrador(){};
-Integrador::~Integrador(){};
+Integrador::Integrador(){}
+Integrador::~Integrador(){}
 
 Sinal* Integrador::processar(Sinal* sinalIN){
     int comprimento = sinalIN->getComprimento();
-    double sequencia[comprimento];
+    double *sequencia = new double[comprimento];
 
     sequencia[0] = sinalIN->getSequencia()[0];
     for(int i=1; i<comprimento; i++){
@@ -13,6 +13,8 @@ Sinal* Integrador::processar(Sinal* sinalIN){
     }
 
     this->sinalOUT = new Sinal(sequencia, comprimento);
+    delete[] sequencia;
+
     return sinalOUT;
 
 }
