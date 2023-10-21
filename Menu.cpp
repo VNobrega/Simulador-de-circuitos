@@ -1,6 +1,10 @@
 #include <iostream>
 #include <cmath>
 #include "Sinal.h"
+#include "Amplificador.h"
+#include "Somador.h"
+#include "Derivador.h"
+#include "Integrador.h"
 #include "ModuloRealimentado.h"
 #define MAX 60
 #define PI 3.14159265359
@@ -88,15 +92,44 @@ Sinal* novoSinal(){
 void novaOperacao(Sinal *sinalIN){
     int escolha1,escolha2;
 
-        cout << "Qual operacao voce gostaria de fazer?" << endl
-        << "1) Amplificar" << endl
-        << "2) Somar" << endl
-        << "3) Derivar" << endl
-        << "4) Integrar" << endl
-        << "Escolha: ";
-        cin >> escolha1;
+    cout << "Qual operacao voce gostaria de fazer?" << endl
+    << "1) Amplificar" << endl
+    << "2) Somar" << endl
+    << "3) Derivar" << endl
+    << "4) Integrar" << endl
+    << "Escolha: ";
+    cin >> escolha1;
+    cout << endl;
 
-        if(escolha1 == 1) {
+    if(escolha1 == 1) {
+        double g;
 
-        }
+        cout << "Qual o ganho dessa amplificacao?" << endl
+        << "g: ";
+        cin >> g;
+        cout << endl;
+
+        Amplificador* amplificador = new Amplificador(g);
+        sinalIN = amplificador->processar(sinalIN);
+    }
+    
+    if(escolha1 == 2) {
+        cout << "Informe mais um sinal para ser somado." << endl << endl;
+
+        Sinal* sinalIN2 = novoSinal();
+        Somador* somador = new Somador();
+        sinalIN = somador->processar(sinalIN, sinalIN2);
+    }
+
+    cout << "O que voce quer fazer agora?" << endl
+    << "1) Realizar mais uma operacao no resultado" << endl
+    << "2) Imprimir o resultado para terminar" << endl
+    << "Escolha: ";
+    cin >> escolha2;
+    cout << endl;
+
+    if(escolha2 == 1)
+        novaOperacao(sinalIN);
+    if(escolha2==2)
+        sinalIN->imprimir("Resultado Final");
 }
