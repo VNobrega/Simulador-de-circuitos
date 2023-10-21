@@ -1,7 +1,5 @@
 #include "ModuloRealimentado.h"
 #include "Piloto.h"
-#include "Amplificador.h"
-#include "Integrador.h"
 #include "Somador.h"
 
 
