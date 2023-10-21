@@ -1,6 +1,9 @@
 #include <iostream>
+#include "Sinal.h"
 
 using namespace std;
+
+Sinal* novoSinal();
 
 void menu(){
     int escolha1,escolha2;
@@ -13,6 +16,8 @@ void menu(){
     << "Escolha: ";
     cin >> escolha1;
     cout << endl << endl;
+
+    if(escolha1 = 1){
 
     cout << "Qual sinal voce gostaria de utilizar como entrada da sua simulacao?" << endl
     << "1) 5+3*cos(n*pi/8)" << endl
@@ -31,4 +36,14 @@ void menu(){
     << "g = ";
     cin >> g;
     cout << endl;
+
+    }
+
+    if(escolha1 = 2) {
+        
+    }
+}
+
+Sinal* novoSinal(){
+
 }
