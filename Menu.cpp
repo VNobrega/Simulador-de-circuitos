@@ -1,7 +1,9 @@
 #include <iostream>
+#include <cmath>
 #include "Sinal.h"
 #include "ModuloRealimentado.h"
 #define MAX 60
+#define PI 3.14159265359
 
 using namespace std;
 
@@ -19,7 +21,7 @@ void menu(){
     cin >> escolha1;
     cout << endl;
 
-    if(escolha1 = 1){
+    if(escolha1 == 1){
         Sinal* sinal = novoSinal();
 
         cout << "Qual o ganho do acelerador?" << endl
@@ -31,7 +33,7 @@ void menu(){
         (pilotoAutomatico->processar(sinal))->imprimir("Velocidade do Carro");
     }
 
-    if(escolha1 = 2) {
+    if(escolha1 == 2) {
 
     }
 }
@@ -47,11 +49,12 @@ Sinal* novoSinal(){
     cin >> escolha2;
     cout << endl;
 
-    if(escolha2 = 1) {
-
+    if(escolha2 == 1) {
+        for(int i = 0; i < MAX; i++)
+            sequencia[i] = 5+3*cos(i*PI/8);
     }
 
-    if(escolha2 = 2) {
+    if(escolha2 == 2) {
         double c;
         cout << "Qual o valor dessa constante?" << endl
         << "C = ";
@@ -62,7 +65,7 @@ Sinal* novoSinal(){
             sequencia[i] = c;
     }
 
-    if(escolha2 = 3) {
+    if(escolha2 == 3) {
 
     }
     Sinal* sinal = new Sinal(sequencia,MAX);
