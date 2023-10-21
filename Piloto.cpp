@@ -11,12 +11,11 @@ Sinal* Piloto::processar(Sinal* sinalIN){
     Amplificador *amplificador = new Amplificador(ganho);
     Integrador *integrador = new Integrador();
 
-    Sinal* sequencia = amplificador->processar(sinalIN);
-    sinalOUT = integrador->processar(sequencia);
+    sinalOUT = amplificador->processar(sinalIN);
+    sinalOUT = integrador->processar(sinalOUT);
     
     amplificador->~Amplificador();
     integrador->~Integrador();
-    sequencia->~Sinal();
 
     return sinalOUT;
 
