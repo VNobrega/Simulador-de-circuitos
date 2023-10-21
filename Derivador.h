@@ -5,7 +5,7 @@
 
 class Derivador{
 private:
-    
+    Sinal* sinalOUT;
 
 public:
     Derivador();
