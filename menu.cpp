@@ -6,8 +6,6 @@
 #include "Derivador.h"
 #include "Integrador.h"
 #include "ModuloRealimentado.h"
-#define MAX 60
-#define PI 3.14159265359
 
 using namespace std;
 
@@ -36,7 +34,12 @@ void menu(){
         cout << endl;
 
         ModuloRealimentado* pilotoAutomatico = new ModuloRealimentado(g);
-        (pilotoAutomatico->processar(sinalIN))->imprimir("Velocidade do Carro");
+        Sinal* sinalOUT = pilotoAutomatico->processar(sinalIN);
+
+        sinalOUT->imprimir("Velocidade do Carro");
+        pilotoAutomatico->~ModuloRealimentado();
+        sinalIN->~Sinal();
+        sinalOUT->~Sinal();
     }
 
     if(escolha == 2) {
@@ -46,7 +49,7 @@ void menu(){
 }
 
 Sinal* novoSinal(){
-    double sequencia[MAX];
+    double *sequencia = new double[60];
     int escolha;
 
     cout << "Qual sinal voce gostaria de utilizar como entrada da sua simulacao?" << endl
@@ -58,8 +61,8 @@ Sinal* novoSinal(){
     cout << endl;
 
     if(escolha == 1) {
-        for(int i = 0; i < MAX; i++)
-            sequencia[i] = 5+3*cos(i*PI/8);
+        for(int i = 0; i < 60; i++)
+            sequencia[i] = 5+3*cos(i*M_PI/8);
     }
 
     if(escolha == 2) {
@@ -70,7 +73,7 @@ Sinal* novoSinal(){
         cin >> c;
         cout << endl;
 
-        for(int i = 0; i < MAX; i++)
+        for(int i = 0; i < 60; i++)
             sequencia[i] = c;
     }
 
@@ -82,10 +85,11 @@ Sinal* novoSinal(){
         cin >> a;
         cout << endl;
 
-        for(int i = 0; i < MAX; i++)
+        for(int i = 0; i < 60; i++)
             sequencia[i] = i*a;
     }
-    Sinal* sinalOUT = new Sinal(sequencia,MAX);
+    Sinal* sinalOUT = new Sinal(sequencia,60);
+    delete[] sequencia;
     return sinalOUT;
 }
 
@@ -119,16 +123,20 @@ void novaOperacao(Sinal *sinalIN){
         Sinal* sinalIN2 = novoSinal();
         Somador* somador = new Somador();
         sinalIN = somador->processar(sinalIN, sinalIN2);
+        sinalIN2->~Sinal();
+        somador->~Somador();
     }
 
     if(escolha1 == 3) {
         Derivador* derivador = new Derivador();
         sinalIN = derivador->processar(sinalIN);
+        derivador->~Derivador();
     }
 
     if(escolha1 == 4) {
         Integrador* integrador = new Integrador();
         sinalIN = integrador->processar(sinalIN);
+        integrador->~Integrador();
     }
 
     cout << "O que voce quer fazer agora?" << endl
@@ -142,4 +150,5 @@ void novaOperacao(Sinal *sinalIN){
         novaOperacao(sinalIN);
     if(escolha2==2)
         sinalIN->imprimir("Resultado Final");
+        sinalIN->~Sinal();
 }
