@@ -11,8 +11,8 @@ Sinal* Derivador::processar(Sinal* sinalIN){
         sequencia[i] = sinalIN->getSequencia()[i]-sinalIN->getSequencia()[i-1];
     }
 
-   this->sinalOUT = new Sinal(sequencia, comprimento);
-   delete[] sequencia;
+    Sinal *sinalOUT = new Sinal(sequencia, comprimento);
+    delete[] sequencia;
 
    return sinalOUT;
 

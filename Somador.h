@@ -5,7 +5,6 @@
 
 class Somador{
 private:
-    Sinal* sinalOUT;
     
 public:
     Somador();

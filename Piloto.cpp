@@ -11,7 +11,7 @@ Sinal* Piloto::processar(Sinal* sinalIN){
     Amplificador *amplificador = new Amplificador(ganho);
     Integrador *integrador = new Integrador();
 
-    sinalOUT = amplificador->processar(sinalIN);
+    Sinal* sinalOUT = amplificador->processar(sinalIN);
     sinalOUT = integrador->processar(sinalOUT);
     
     amplificador->~Amplificador();

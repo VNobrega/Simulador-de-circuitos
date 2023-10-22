@@ -11,7 +11,7 @@ Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
         sequencia[i] = sinalIN1->getSequencia()[i] + sinalIN2->getSequencia()[i];
     }
     
-    sinalOUT = new Sinal(sequencia, min);
+    Sinal* sinalOUT = new Sinal(sequencia, min);
     delete[] sequencia;
 
     return sinalOUT;

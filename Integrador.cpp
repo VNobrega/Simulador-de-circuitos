@@ -12,7 +12,7 @@ Sinal* Integrador::processar(Sinal* sinalIN){
         sequencia[i] = sinalIN->getSequencia()[i]+sequencia[i-1];
     }
 
-    this->sinalOUT = new Sinal(sequencia, comprimento);
+    Sinal* sinalOUT = new Sinal(sequencia, comprimento);
     delete[] sequencia;
 
     return sinalOUT;
