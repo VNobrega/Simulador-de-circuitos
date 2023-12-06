@@ -9,15 +9,20 @@ class Sinal{
 
 private: 
    static int max;
-   double *sequencia; 
+   double *sequencia;
+   int constante;
    int comprimento;
+   int tamanho;
 
 public: 
-   Sinal(double *sequencia, int comprimento); 
-   virtual ~Sinal();
+   Sinal(double *sequencia, int comprimento);
+   Sinal(double constante, int comprimento);
+   ~Sinal();
    double* getSequencia(); 
    int getComprimento();
    void imprimir(string nomeDoSinal);
+   void imprimir();
+   void imprimir(int tamanho);
    
 };
 
