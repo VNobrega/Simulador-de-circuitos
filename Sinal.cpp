@@ -2,10 +2,18 @@
 
 Sinal::Sinal(double *sequencia, int comprimento): comprimento(comprimento){
     this->sequencia = new double[comprimento];
-    for(int i=0; i<comprimento; i++){
+    for(int i = 0; i < comprimento; i++)
         this->sequencia[i] = sequencia[i];
-    }
+}
 
+Sinal::Sinal(double constante, int comprimento): comprimento(comprimento){
+    sequencia = new double[comprimento];
+    for(int i = 0; i < comprimento; i++)
+        sequencia[i] = constante;
+}
+
+Sinal::~Sinal(){
+    delete[] sequencia;
 }
 
 double* Sinal::getSequencia(){
@@ -23,6 +31,14 @@ void Sinal::imprimir(string nomeDoSinal){
     
 }
 
-Sinal::~Sinal(){
-    delete[] sequencia;
+void Sinal::imprimir(){
+    for(int i = 0; i < comprimento; i++)
+        cout << i << "- " << sequencia[i] << endl;
+    cout << "--" << endl;
+}
+
+void Sinal::imprimir(int tamanho){
+    for(int i = 0; i < comprimento && i < tamanho; i++)
+        cout << i << "- " << sequencia[i] << endl;
+    cout << "--" << endl;
 }
