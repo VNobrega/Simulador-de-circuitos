@@ -1,6 +1,6 @@
 #include "Somador.h"
 
-Somador::Somador(){}
+Somador::Somador():CircuitoMISO(){}
 Somador::~Somador(){};
 
 Sinal* CircuitoMISO::processar(Sinal* sinalIN1, Sinal* sinalIN2){
