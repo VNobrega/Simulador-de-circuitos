@@ -1,19 +1,28 @@
-#ifndef AMPLIFICADOR_H
-#define AMPLIFICADOR_H
+#include "Amplificador.h"
 
-#include "CircuitoSISO.h"
+Amplificador::Amplificador(double ganho): CircuitoSISO(){
+    this->ganho = ganho;
+}
 
-class Amplificador:public CircuitoSISO{
-private:
+Amplificador::~Amplificador(){}
 
-public:
-    Amplificador(double ganho); 
-    virtual ~Amplificador();
-    void setGanho(double ganho); 
-    double getGanho();
+Sinal* CircuitoSISO::processar(Sinal* sinalIN){
+    int comprimento = sinalIN->getComprimento();
+    double *sequencia = new double[comprimento];
 
-};
+    for(int i = 0; i < comprimento; i++){
+        sequencia[i] = sinalIN->getSequencia()[i] * ganho;
+    }
+    Sinal *sinalA = new Sinal(sequencia,comprimento);
+    delete[] sequencia;
+    
+    return sinalA;
+}
 
+void Amplificador::setGanho(double ganho){
+    this->ganho = ganho;
+}
 
-
-#endif
+double Amplificador::getGanho(){
+    return ganho;
+}
