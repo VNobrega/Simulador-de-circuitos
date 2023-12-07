@@ -1,15 +1,16 @@
 #include "ModuloRealimentado.h"
-#include "Piloto.h"
 #include "Somador.h"
 
+ModuloRealimentado::ModuloRealimentado(): Modulo(){
+    ModuloEmSerie *moduloemserie = new ModuloEmSerie();
+}
 
-ModuloRealimentado::ModuloRealimentado(double ganho):ganho(ganho){}
-
-ModuloRealimentado::~ModuloRealimentado(){}
+ModuloRealimentado::~ModuloRealimentado(){
+    delete moduloemserie;
+}
 
 Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
-   
-    Piloto *piloto = new Piloto(ganho);
+
     Somador *somador = new Somador();
     Sinal *diferenca = nullptr;
     Sinal *sinalOUT = nullptr;
@@ -21,7 +22,7 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
 
     sequenciaSaidaInvertida[0] = 0;
     diferenca = new Sinal(sinalIN->getSequencia(),1);
-    sinalOUT = piloto->processar(diferenca);
+    sinalOUT = moduloemserie->processar(diferenca);
     diferenca->~Sinal();
 
    
@@ -31,16 +32,23 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
         saidaInvertida = new Sinal(sequenciaSaidaInvertida, i+1);
         diferenca = somador->processar(sinalIN, saidaInvertida);
         sinalOUT->~Sinal();
-        sinalOUT = piloto->processar(diferenca);
+        sinalOUT = moduloemserie->processar(diferenca);
         saidaInvertida->~Sinal();
         diferenca->~Sinal();
 
     }
 
     delete[] sequenciaSaidaInvertida;
-    piloto->~Piloto();
     somador->~Somador();
 
     return sinalOUT;
 
+}
+
+void ModuloRealimentado::adicionar(CircuitoSISO* circ){
+    moduloemserie->adicionar(circ);
+}
+
+list<CircuitoSISO*>* ModuloRealimentado::getCircuitos(){
+    return moduloemserie->getCircuitos();
 }
