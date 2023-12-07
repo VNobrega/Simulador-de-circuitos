@@ -5,7 +5,6 @@
 
 class ModuloEmParalelo:public Modulo{
 private:
-    list<CircuitoSISO*>* circuitos;
     
 public:
     ModuloEmParalelo();
