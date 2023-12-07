@@ -1,7 +1,8 @@
 #include "Modulo.h"
+#include "Integrador.h"
 
 Modulo::Modulo():CircuitoSISO(){
-    list<CircuitoSISO*>* circuitos = new list<CircuitoSISO*>();
+    this->circuitos = new list<CircuitoSISO*>();
 }
 
 Modulo::~Modulo(){
