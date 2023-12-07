@@ -3,7 +3,7 @@
 Integrador::Integrador(): CircuitoSISO(){}
 Integrador::~Integrador(){}
 
-Sinal* CircuitoSISO::processar(Sinal* sinalIN){
+Sinal* Integrador::processar(Sinal* sinalIN){
     int comprimento = sinalIN->getComprimento();
     double *sequencia = new double[comprimento];
 
