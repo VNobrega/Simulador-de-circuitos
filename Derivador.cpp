@@ -3,7 +3,7 @@
 Derivador::Derivador(): CircuitoSISO(){}
 Derivador::~Derivador(){}
 
-Sinal* CircuitoSISO::processar(Sinal* sinalIN){
+Sinal* Derivador::processar(Sinal* sinalIN){
     int comprimento = sinalIN->getComprimento();
     double *sequencia = new double[comprimento];
     sequencia[0] = sinalIN->getSequencia()[0];
