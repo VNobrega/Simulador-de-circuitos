@@ -9,8 +9,7 @@ Sinal* ModuloEmParalelo::processar(Sinal* sinalIN){
         throw new logic_error ("Modulo Vazio");
     list<CircuitoSISO*>::iterator i = circuitos->begin();
     Somador* somador = new Somador();
-    Sinal* sinalOUT = (*i)->processar(sinalIN);
-    i++;
+    Sinal* sinalOUT = nullptr;
 
     while(i != circuitos->end()) {
         sinalOUT = somador->processar(sinalOUT, (*i)->processar(sinalIN));
