@@ -3,12 +3,13 @@
 
 #include "CircuitoSISO.h"
 
-class Derivador{
+class Derivador:public CircuitoSISO{
 private:
 
 public:
     Derivador();
     virtual ~Derivador();
+    Sinal* processar(Sinal* sinalIN);
 
 };
 
