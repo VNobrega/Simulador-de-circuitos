@@ -3,12 +3,13 @@
 
 #include "CircuitoSISO.h"
 
-class Integrador{
+class Integrador:public CircuitoSISO{
 private:
 
 public:
     Integrador();
     virtual ~Integrador();
+    Sinal* processar(Sinal* sinalIN);
 
 };
 
