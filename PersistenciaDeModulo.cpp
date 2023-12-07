@@ -38,16 +38,12 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
 }
 
 void saidaArquivo(Modulo* mod,ofstream& output){
-    cout << "0";
     list<CircuitoSISO*>* circuitos = mod->getCircuitos();
     list<CircuitoSISO*>::iterator i = circuitos->begin();
-    cout << "1";
 
     while(i != circuitos->end()) {
-        cout << "2";
         ModuloEmSerie* s = dynamic_cast<ModuloEmSerie*>(*i);
         if(s != NULL){
-            cout << "3";
             output << "S" << endl;
             saidaArquivo(s,output);
             delete s;
