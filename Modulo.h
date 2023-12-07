@@ -5,8 +5,9 @@
 #include "CircuitoSISO.h"
 
 class Modulo:public CircuitoSISO{
-private:
+protected:
     list<CircuitoSISO*>* circuitos;
+
 public:
     Modulo();
     virtual ~Modulo();
