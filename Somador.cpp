@@ -3,7 +3,7 @@
 Somador::Somador():CircuitoMISO(){}
 Somador::~Somador(){};
 
-Sinal* CircuitoMISO::processar(Sinal* sinalIN1, Sinal* sinalIN2){
+Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
     int min = (sinalIN1->getComprimento()<sinalIN2->getComprimento())?sinalIN1->getComprimento():sinalIN2->getComprimento();
     double *sequencia = new double[min];
 
