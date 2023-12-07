@@ -1,4 +1,4 @@
 #include "CircuitoSISO.h"
 
-CircuitoSISO::CircuitoSISO(){}
+CircuitoSISO::CircuitoSISO():Circuito(){}
 CircuitoSISO::~CircuitoSISO(){}
