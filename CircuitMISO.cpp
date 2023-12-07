@@ -1,4 +1,4 @@
 #include "CircuitoMISO.h"
 
-CircuitoMISO::CircuitoMISO(){}
+CircuitoMISO::CircuitoMISO():Circuito(){}
 CircuitoMISO::~CircuitoMISO(){}
