@@ -1,6 +1,6 @@
 #include "Modulo.h"
 
-Modulo::Modulo(){
+Modulo::Modulo():CircuitoSISO(){
     list<CircuitoSISO*>* circuitos = new list<CircuitoSISO*>();
 }
 
