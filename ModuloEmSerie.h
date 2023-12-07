@@ -5,7 +5,6 @@
 
 class ModuloEmSerie:public Modulo{
 private:
-    list<CircuitoSISO*>* circuitos;
     
 public:
     ModuloEmSerie();
