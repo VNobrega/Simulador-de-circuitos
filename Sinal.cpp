@@ -1,12 +1,16 @@
 #include "Sinal.h"
 
 Sinal::Sinal(double *sequencia, int comprimento): comprimento(comprimento){
+    if(comprimento <= 0)
+        throw new invalid_argument ("Comprimento Invalido");
     this->sequencia = new double[comprimento];
     for(int i = 0; i < comprimento; i++)
         this->sequencia[i] = sequencia[i];
 }
 
 Sinal::Sinal(double constante, int comprimento): comprimento(comprimento){
+    if(comprimento <= 0)
+        throw new invalid_argument ("Comprimento Invalido");
     sequencia = new double[comprimento];
     for(int i = 0; i < comprimento; i++)
         sequencia[i] = constante;
