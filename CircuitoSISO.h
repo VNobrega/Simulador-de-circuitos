@@ -7,9 +7,6 @@
 class CircuitoSISO: public Circuito{
 private:
 
-protected:
-    double ganho;
-
 public:
     CircuitoSISO();
     virtual ~CircuitoSISO();
