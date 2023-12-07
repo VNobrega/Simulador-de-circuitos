@@ -10,9 +10,7 @@ class Sinal{
 private: 
    static int max;
    double *sequencia;
-   int constante;
    int comprimento;
-   int tamanho;
 
 public: 
    Sinal(double *sequencia, int comprimento);
