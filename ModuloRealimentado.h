@@ -1,19 +1,20 @@
 #ifndef MODULOREALIMENTADO_H
 #define MODULOREALIMENTADO_H
 
-#include "Sinal.h"
+#include "Modulo.h"
+#include "ModuloEmSerie.h"
 
-class ModuloRealimentado{
+class ModuloRealimentado:public Modulo{
 private:
-    double ganho;
-
+    ModuloEmSerie* moduloemserie;
+    
 public:
-    ModuloRealimentado(double ganho);
+    ModuloRealimentado();
     virtual ~ModuloRealimentado();
     Sinal* processar(Sinal* sinalIN);
+    void adicionar(CircuitoSISO* circ);
+    list<CircuitoSISO*>* getCircuitos();
 
 };
-
-
 
 #endif
