@@ -1,9 +1,12 @@
 #include "Amplificador.h"
 
-Amplificador::Amplificador(double ganho): ganho(ganho){}
+Amplificador::Amplificador(double ganho): CircuitoSISO(){
+    this->ganho = ganho;
+}
+
 Amplificador::~Amplificador(){}
 
-Sinal* Amplificador::processar(Sinal* sinalIN){
+Sinal* CircuitoSISO::processar(Sinal* sinalIN){
     int comprimento = sinalIN->getComprimento();
     double *sequencia = new double[comprimento];
 
