@@ -3,6 +3,7 @@
 #include "ModuloEmParalelo.h"
 #include "ModuloRealimentado.h"
 
+char c;
 
 void saidaArquivo(Modulo* mod,ofstream& output);
 
@@ -85,8 +86,9 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
         throw new invalid_argument ("Arquivo nao encontrado");
     }
 
+    input>>c;
     Modulo* moduloLido = entradaArquivo(input);
-
+    
     if(!input.eof()){
         input.close();
         moduloLido->~Modulo();
@@ -100,14 +102,12 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
 
 Modulo* entradaArquivo(ifstream& input){
     Modulo* moduloLer = nullptr;
-    char c;
-    input>>c;
     if(c == 'S') moduloLer = new ModuloEmSerie();
     if(c == 'P') moduloLer = new ModuloEmParalelo();
     if(c == 'R') moduloLer = new ModuloRealimentado();
     input>>c;
+
     while(c != 'f'){
-       
         if(c == 'S' || c == 'P' || c == 'R') moduloLer->adicionar(entradaArquivo(input));
         else if(c == 'I'){
             CircuitoSISO *circ = new Integrador();
