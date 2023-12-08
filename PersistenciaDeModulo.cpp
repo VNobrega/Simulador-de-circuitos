@@ -1,4 +1,8 @@
 #include "PersistenciaDeModulo.h"
+#include "ModuloEmSerie.h"
+#include "ModuloEmParalelo.h"
+#include "ModuloRealimentado.h"
+
 
 void saidaArquivo(Modulo* mod,ofstream& output);
 
@@ -16,26 +20,6 @@ void PersistenciaDeModulo::salvarEmArquivo(Modulo* mod){
     output.close();
 }
 
-Modulo* PersistenciaDeModulo::lerDeArquivo(){
-    ifstream input;
-    input.open(nomeDoArquivo);
-
-    if(input.fail()) {
-        input.close();
-        throw new invalid_argument ("Arquivo nao encontrado");
-    }
-
-    Modulo* moduloLido = entradaArquivo(input);
-
-    if(!input.eof()){
-        input.close();
-        throw new logic_error ("Erro de leitura");
-    }
-    
-    input.close();
-
-    return moduloLido;
-}
 
 void saidaArquivo(Modulo* mod,ofstream& output){
     list<CircuitoSISO*>* circuitos = new list<CircuitoSISO*>;
@@ -93,5 +77,36 @@ void saidaArquivo(Modulo* mod,ofstream& output){
 }
 
 Modulo* entradaArquivo(ifstream& input){
+    Modulo* moduloLer = nullptr;
+    char c;
+    input>>c;
+    if(c == 'S') moduloLer = new ModuloEmSerie();
+    if(c == 'P') moduloLer = new ModuloEmParalelo();
+    if(c == 'R') moduloLer = new ModuloRealimentado();
+    input>>c;
+    while(c != 'f'){
+       
+        if(c == 'S' || c == 'P' || c == 'R') moduloLer->adicionar(entradaArquivo(input));
+        else if(c == 'I'){
+            CircuitoSISO *circ = new Integrador();
+            moduloLer->adicionar(circ);
+        }
+        else if(c == 'D'){
+            CircuitoSISO *circ = new Derivador();
+            moduloLer->adicionar(circ);
+        }
+        else if(c == 'A'){
+            double d;
+            if(!(input>>d)) return moduloLer;
+            CircuitoSISO *circ = new Amplificador(d);
+            moduloLer->adicionar(circ);
+        } 
+       
+        else return moduloLer;
+        input>>c;
+    }
+
+    input>>c;
+    return moduloLer; 
 
 }
