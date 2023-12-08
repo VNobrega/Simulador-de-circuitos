@@ -41,49 +41,49 @@ void saidaArquivo(Modulo* mod,ofstream& output){
     list<CircuitoSISO*>* circuitos = mod->getCircuitos();
     list<CircuitoSISO*>::iterator i = circuitos->begin();
 
+    ModuloEmSerie* ms = dynamic_cast<ModuloEmSerie*>(mod);
+    if(ms != NULL)
+        output << "S" << endl;
+
+    ModuloEmParalelo* mp = dynamic_cast<ModuloEmParalelo*>(mod);
+    if(mp != NULL)
+        output << "P" << endl;
+        
+    ModuloRealimentado* mr = dynamic_cast<ModuloRealimentado*>(mod);
+    if(mr != NULL)
+        output << "R" << endl;
+
     while(i != circuitos->end()) {
         ModuloEmSerie* s = dynamic_cast<ModuloEmSerie*>(*i);
-        if(s != NULL){
-            output << "S" << endl;
+        if(s != NULL)
             saidaArquivo(s,output);
-            delete s;
-        }
-        else delete s;
+
         ModuloEmParalelo* p = dynamic_cast<ModuloEmParalelo*>(*i);
-        if(p != NULL){
-            output << "P" << endl;
+        if(p != NULL)
             saidaArquivo(p,output);
-            delete p;
-        }
-        else delete p;
+
         ModuloRealimentado* r = dynamic_cast<ModuloRealimentado*>(*i);
-        if(r != NULL){
-            output << "R" << endl;
+        if(r != NULL)
             saidaArquivo(r,output);
-            delete r;
-        }
-        else delete r;
+
         Amplificador* a = dynamic_cast<Amplificador*>(*i);
-        if(a != NULL){
+        if(a != NULL)
             output << "A " << a->getGanho() << endl;
-            delete a;
-        }
-        else delete a;
+
         Integrador* g = dynamic_cast<Integrador*>(*i);
-        if(g != NULL){
+        if(g != NULL)
             output << "I" << endl;
-            delete g;
-        }
-        else delete g;
+
         Derivador* d = dynamic_cast<Derivador*>(*i);
-        if(d != NULL){
+        if(d != NULL)
             output << "D" << endl;
-            delete d;
-        }
-        else delete d;
 
         i++;
     }
+    output << "f" << endl;
+
+    delete circuitos;
+}
     output << "f" << endl;
 
     delete circuitos;
