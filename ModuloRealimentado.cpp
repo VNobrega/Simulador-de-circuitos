@@ -17,6 +17,17 @@ list<CircuitoSISO*>* ModuloRealimentado::getCircuitos(){
     return moduloemserie->getCircuitos();
 }
 
+void ModuloRealimentado::imprimir(){
+    list<CircuitoSISO*>::iterator i = getCircuitos()->begin();
+
+    cout << "Modulo com ID [" << getID() << "] e:" << endl;
+    while(i != getCircuitos()->end()) {
+        cout << "Circuito com ID [" << (*i)->getID() << "]" << endl;
+        i++;
+    }
+    cout << "--" << endl;
+}
+
 Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
     Somador *somador = new Somador();
     Sinal *diferenca = nullptr;
