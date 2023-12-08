@@ -38,20 +38,27 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
 }
 
 void saidaArquivo(Modulo* mod,ofstream& output){
-    list<CircuitoSISO*>* circuitos = mod->getCircuitos();
-    list<CircuitoSISO*>::iterator i = circuitos->begin();
+    list<CircuitoSISO*>* circuitos = new list<CircuitoSISO*>;
 
     ModuloEmSerie* ms = dynamic_cast<ModuloEmSerie*>(mod);
-    if(ms != NULL)
+    if(ms != NULL){
         output << "S" << endl;
+        circuitos = ms->getCircuitos();
+    }
 
     ModuloEmParalelo* mp = dynamic_cast<ModuloEmParalelo*>(mod);
-    if(mp != NULL)
+    if(mp != NULL){
         output << "P" << endl;
-        
+        circuitos = mp->getCircuitos();
+    }
+
     ModuloRealimentado* mr = dynamic_cast<ModuloRealimentado*>(mod);
-    if(mr != NULL)
+    if(mr != NULL){
         output << "R" << endl;
+        circuitos = mr->getCircuitos();
+    }
+
+    list<CircuitoSISO*>::iterator i = circuitos->begin();
 
     while(i != circuitos->end()) {
         ModuloEmSerie* s = dynamic_cast<ModuloEmSerie*>(*i);
@@ -80,10 +87,6 @@ void saidaArquivo(Modulo* mod,ofstream& output){
 
         i++;
     }
-    output << "f" << endl;
-
-    delete circuitos;
-}
     output << "f" << endl;
 
     delete circuitos;
