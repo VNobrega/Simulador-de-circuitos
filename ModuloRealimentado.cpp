@@ -20,9 +20,9 @@ list<CircuitoSISO*>* ModuloRealimentado::getCircuitos(){
 void ModuloRealimentado::imprimir(){
     list<CircuitoSISO*>::iterator i = getCircuitos()->begin();
 
-    cout << "Modulo com ID [" << getID() << "] e:" << endl;
+    cout << "Modulo com ID " << getID() << " e:" << endl;
     while(i != getCircuitos()->end()) {
-        cout << "Circuito com ID [" << (*i)->getID() << "]" << endl;
+        cout << "Circuito com ID " << (*i)->getID() << endl;
         i++;
     }
     cout << "--" << endl;
