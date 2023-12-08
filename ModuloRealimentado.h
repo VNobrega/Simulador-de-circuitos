@@ -12,7 +12,7 @@ public:
     ModuloRealimentado();
     virtual ~ModuloRealimentado();
     Sinal* processar(Sinal* sinalIN);
-    void adicionar(CircuitoSISO* circ);
+    virtual void adicionar(CircuitoSISO* circ);
     list<CircuitoSISO*>* getCircuitos();
     void imprimir();
 

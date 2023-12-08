@@ -11,7 +11,7 @@ protected:
 public:
     Modulo();
     virtual ~Modulo();
-    void adicionar(CircuitoSISO* circ);
+    virtual void adicionar(CircuitoSISO* circ);
     list<CircuitoSISO*>* getCircuitos();
     void imprimir();
 
