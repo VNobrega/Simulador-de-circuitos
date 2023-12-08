@@ -14,7 +14,7 @@ public:
     Sinal* processar(Sinal* sinalIN);
     virtual void adicionar(CircuitoSISO* circ);
     list<CircuitoSISO*>* getCircuitos();
-    void imprimir();
+    virtual void imprimir();
 
 };
 
