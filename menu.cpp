@@ -6,46 +6,89 @@
 #include "Derivador.h"
 #include "Integrador.h"
 #include "ModuloRealimentado.h"
+#include "PersistenciaDeModulo.h"
 
 using namespace std;
 
 Sinal* novoSinal();
 
-void novaOperacao(Sinal *sinalIN);
+CircuitoSISO* novaOperacao();
 
 void menu(){
     int escolha;
+    string nome;
+    Modulo* moduloOUT;
 
     cout << "       Simulink em C++" << endl 
     << "Qual simulacao voce gostaria de fazer?" << endl
-    << "1) Piloto Automatico" << endl
+    << "1) Circuito advindo de arquivo" << endl
     << "2) Sua propria sequencia de operacoes" << endl
     << "Escolha: ";
     cin >> escolha;
     cout << endl;
 
     if(escolha == 1){
-        double g;
         Sinal* sinalIN = novoSinal();
 
-        cout << "Qual o ganho do acelerador?" << endl
-        << "g = ";
-        cin >> g;
+        cout << "Qual o nome do arquivo a ser lido?" << endl
+        << "Nome: ";
+        cin >> nome;
         cout << endl;
 
-        ModuloRealimentado* pilotoAutomatico = new ModuloRealimentado(g);
-        Sinal* sinalOUT = pilotoAutomatico->processar(sinalIN);
+        PersistenciaDeModulo* p = new PersistenciaDeModulo(nome);
+        Modulo* moduloOUT = p->lerDeArquivo();
+        Sinal* sinalOUT = (moduloOUT)->processar(sinalIN);
 
-        sinalOUT->imprimir("Velocidade do Carro");
-        pilotoAutomatico->~ModuloRealimentado();
+        sinalOUT->imprimir("Resultado Final");
+
+        p->~PersistenciaDeModulo();
         sinalIN->~Sinal();
         sinalOUT->~Sinal();
     }
 
     if(escolha == 2) {
         Sinal* sinalIN = novoSinal();
-        novaOperacao(sinalIN);
+
+        cout << "Qual estrutura de operacoes voce deseja ter como base?" << endl
+        << "1) Operacoes em serie nao realimentadas" << endl
+        << "2) Operacoes em paralelo nao realimentadas" << endl
+        << "3) Operacoes em serie realimentadas" << endl
+        << "Escolha: " << endl;
+        cin >> escolha;
+        cout << endl;
+
+        if(escolha == 1)
+            Modulo* moduloOUT = new ModuloEmSerie();
+        if(escolha == 2)
+            Modulo* moduloOUT = new ModuloEmParalelo();
+        if(escolha == 3)
+            Modulo* moduloOUT = new ModuloRealimentado();
+        
+        moduloOUT->adicionar(novaOperacao());
+        moduloOUT->processar(sinalIN);
+        sinalIN->imprimir("Resultado Final");
     }
+
+    cout << "Voce gostaria de salvar o circuito em um novo arquivo?" << endl
+    << "1) Sim" << endl
+    << "2) Nao" << endl
+    << "Escolha: " << endl;
+    cin >> escolha;
+    cout << endl;
+
+    if(escolha == 1) {
+        cout << "Qual o nome do arquivo a ser escrito?" << endl
+        << "Nome: " << endl;;
+        cin >> nome;
+        cout << endl;
+
+        PersistenciaDeModulo* p = new PersistenciaDeModulo(nome);
+        p->salvarEmArquivo(moduloOUT);
+
+        p->~PersistenciaDeModulo();
+    }
+
+    delete moduloOUT;
 }
 
 Sinal* novoSinal(){
@@ -93,14 +136,13 @@ Sinal* novoSinal(){
     return sinalOUT;
 }
 
-void novaOperacao(Sinal *sinalIN){
+CircuitoSISO* novaOperacao(){
     int escolha1,escolha2;
 
     cout << "Qual operacao voce gostaria de fazer?" << endl
     << "1) Amplificar" << endl
-    << "2) Somar" << endl
-    << "3) Derivar" << endl
-    << "4) Integrar" << endl
+    << "2) Derivar" << endl
+    << "3) Integrar" << endl
     << "Escolha: ";
     cin >> escolha1;
     cout << endl;
@@ -113,35 +155,24 @@ void novaOperacao(Sinal *sinalIN){
         cin >> g;
         cout << endl;
 
-        Amplificador* amplificador = new Amplificador(g);
-        sinalIN = amplificador->processar(sinalIN);
+        Amplificador* circuito = new Amplificador(g);
+        return circuito;
     }
     
     if(escolha1 == 2) {
-        cout << "Informe mais um sinal para ser somado." << endl << endl;
-
-        Sinal* sinalIN2 = novoSinal();
-        Somador* somador = new Somador();
-        sinalIN = somador->processar(sinalIN, sinalIN2);
-        sinalIN2->~Sinal();
-        somador->~Somador();
+        Derivador* circuito = new Derivador();
+        return circuito;
     }
 
     if(escolha1 == 3) {
-        Derivador* derivador = new Derivador();
-        sinalIN = derivador->processar(sinalIN);
-        derivador->~Derivador();
+        Integrador* circuito = new Integrador();
+        return circuito;
     }
 
-    if(escolha1 == 4) {
-        Integrador* integrador = new Integrador();
-        sinalIN = integrador->processar(sinalIN);
-        integrador->~Integrador();
-    }
-
-    cout << "O que voce quer fazer agora?" << endl
+    return nullptr;
+    /*cout << "O que voce quer fazer agora?" << endl
     << "1) Realizar mais uma operacao no resultado" << endl
-    << "2) Imprimir o resultado para terminar" << endl
+    << "2) Imprimir o resultado" << endl
     << "Escolha: ";
     cin >> escolha2;
     cout << endl;
@@ -150,5 +181,5 @@ void novaOperacao(Sinal *sinalIN){
         novaOperacao(sinalIN);
     if(escolha2==2)
         sinalIN->imprimir("Resultado Final");
-        sinalIN->~Sinal();
+        sinalIN->~Sinal();*/
 }

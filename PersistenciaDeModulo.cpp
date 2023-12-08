@@ -76,29 +76,6 @@ void saidaArquivo(Modulo* mod,ofstream& output){
     delete circuitos;
 }
 
-Modulo* PersistenciaDeModulo::lerDeArquivo(){
-    ifstream input;
-    input.open(nomeDoArquivo);
-
-    if(input.fail()) {
-        input.close();
-        throw new invalid_argument ("Arquivo nao encontrado");
-    }
-
-    Modulo* moduloLido = entradaArquivo(input);
-
-    if(!input.eof()){
-        input.close();
-        moduloLido->~Modulo();
-        throw new logic_error ("Erro de leitura");
-    }
-    
-    input.close();
-
-    return moduloLido;
-}
-    
-
 Modulo* entradaArquivo(ifstream& input){
     Modulo* moduloLer = nullptr;
     char c;
