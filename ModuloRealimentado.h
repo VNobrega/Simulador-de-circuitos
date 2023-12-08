@@ -6,7 +6,7 @@
 
 class ModuloRealimentado:public Modulo{
 private:
-    ModuloEmSerie* moduloemserie;
+    Modulo* moduloemserie;
     
 public:
     ModuloRealimentado();
