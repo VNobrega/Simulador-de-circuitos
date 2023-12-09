@@ -112,20 +112,22 @@ Modulo* entradaArquivo(ifstream& input){
         else if(c == 'I'){
             CircuitoSISO *circ = new Integrador();
             moduloLer->adicionar(circ);
+            input>>c;
         }
         else if(c == 'D'){
             CircuitoSISO *circ = new Derivador();
             moduloLer->adicionar(circ);
+            input>>c;
         }
         else if(c == 'A'){
             double d;
             if(!(input>>d)) return moduloLer;
             CircuitoSISO *circ = new Amplificador(d);
             moduloLer->adicionar(circ);
+            input>>c;
         } 
-       
         else return moduloLer;
-        input>>c;
+        
     }
 
     input>>c;
