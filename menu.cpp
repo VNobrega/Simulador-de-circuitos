@@ -62,7 +62,7 @@ void menu(){
         << "1) Operacoes em serie nao realimentadas" << endl
         << "2) Operacoes em paralelo nao realimentadas" << endl
         << "3) Operacoes em serie realimentadas" << endl
-        << "Escolha: " << endl;
+        << "Escolha: ";
         cin >> escolha;
         cout << endl;
 
@@ -86,10 +86,10 @@ void menu(){
         sinalOUT->~Sinal();
     }
 
-    cout << "Voce gostaria de salvar o circuito em um novo arquivo?" << endl
+    cout << endl << "Voce gostaria de salvar o circuito em um novo arquivo?" << endl
     << "1) Sim" << endl
     << "2) Nao" << endl
-    << "Escolha: " << endl;
+    << "Escolha: ";
     cin >> escolha;
     cout << endl;
 
