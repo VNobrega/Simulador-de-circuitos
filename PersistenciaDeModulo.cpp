@@ -2,6 +2,7 @@
 #include "ModuloEmSerie.h"
 #include "ModuloEmParalelo.h"
 #include "ModuloRealimentado.h"
+#include <stdexcept>
 
 char c;
 

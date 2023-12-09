@@ -1,4 +1,5 @@
 #include "ModuloEmSerie.h"
+#include <stdexcept>
 
 ModuloEmSerie::ModuloEmSerie():Modulo(){}
 ModuloEmSerie::~ModuloEmSerie(){}

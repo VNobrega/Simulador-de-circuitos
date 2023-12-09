@@ -7,6 +7,7 @@
 #include "Integrador.h"
 #include "ModuloRealimentado.h"
 #include "PersistenciaDeModulo.h"
+#include <stdexcept>
 
 using namespace std;
 
@@ -35,15 +36,21 @@ void menu(){
         cin >> nome;
         cout << endl;
 
-        PersistenciaDeModulo* p = new PersistenciaDeModulo(nome);
-        moduloOUT = p->lerDeArquivo();
-        Sinal* sinalOUT = (moduloOUT)->processar(sinalIN);
+        try{
+            PersistenciaDeModulo* p = new PersistenciaDeModulo(nome);
+            moduloOUT = p->lerDeArquivo();
+            Sinal* sinalOUT = (moduloOUT)->processar(sinalIN);
+            sinalOUT->imprimir("Resultado Final");
+            p->~PersistenciaDeModulo();
+            sinalOUT->~Sinal();
 
-        sinalOUT->imprimir("Resultado Final");
+        }
+        catch(invalid_argument *e){cout<<e->what()<<endl;}
+        catch(logic_error *e){cout<<e->what()<<endl;}
 
-        p->~PersistenciaDeModulo();
         sinalIN->~Sinal();
-        sinalOUT->~Sinal();
+
+        
     }
 
     if(escolha == 2) {
