@@ -36,7 +36,7 @@ void menu(){
         cout << endl;
 
         PersistenciaDeModulo* p = new PersistenciaDeModulo(nome);
-        Modulo* moduloOUT = p->lerDeArquivo();
+        moduloOUT = p->lerDeArquivo();
         Sinal* sinalOUT = (moduloOUT)->processar(sinalIN);
 
         sinalOUT->imprimir("Resultado Final");
