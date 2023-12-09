@@ -74,7 +74,6 @@ void saidaArquivo(Modulo* mod,ofstream& output){
     }
     output << "f" << endl;
 
-    delete circuitos;
 }
 
 Modulo* PersistenciaDeModulo::lerDeArquivo(){

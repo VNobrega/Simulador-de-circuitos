@@ -48,7 +48,6 @@ void menu(){
 
     if(escolha == 2) {
         Sinal* sinalIN = novoSinal();
-        Modulo* moduloOUT;
         cout << "Qual estrutura de operacoes voce deseja ter como base?" << endl
         << "1) Operacoes em serie nao realimentadas" << endl
         << "2) Operacoes em paralelo nao realimentadas" << endl
@@ -75,17 +74,16 @@ void menu(){
 
     if(escolha == 1) {
         cout << "Qual o nome do arquivo a ser escrito?" << endl
-        << "Nome: " << endl;;
+        << "Nome: ";
         cin >> nome;
         cout << endl;
 
         PersistenciaDeModulo* p = new PersistenciaDeModulo(nome);
         p->salvarEmArquivo(moduloOUT);
-
         p->~PersistenciaDeModulo();
     }
-
     moduloOUT->~Modulo();
+    
 }
 
 Sinal* novoSinal(){
