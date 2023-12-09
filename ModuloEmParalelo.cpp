@@ -1,5 +1,6 @@
 #include "ModuloEmParalelo.h"
 #include "Somador.h"
+#include <stdexcept>
 
 ModuloEmParalelo::ModuloEmParalelo():Modulo(){}
 ModuloEmParalelo::~ModuloEmParalelo(){}
