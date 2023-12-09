@@ -48,7 +48,7 @@ void menu(){
 
     if(escolha == 2) {
         Sinal* sinalIN = novoSinal();
-
+        Modulo* moduloOUT;
         cout << "Qual estrutura de operacoes voce deseja ter como base?" << endl
         << "1) Operacoes em serie nao realimentadas" << endl
         << "2) Operacoes em paralelo nao realimentadas" << endl
@@ -57,12 +57,9 @@ void menu(){
         cin >> escolha;
         cout << endl;
 
-        if(escolha == 1)
-            Modulo* moduloOUT = new ModuloEmSerie();
-        if(escolha == 2)
-            Modulo* moduloOUT = new ModuloEmParalelo();
-        if(escolha == 3)
-            Modulo* moduloOUT = new ModuloRealimentado();
+        if(escolha == 1) moduloOUT = new ModuloEmSerie();
+        if(escolha == 2) moduloOUT = new ModuloEmParalelo();
+        if(escolha == 3) moduloOUT = new ModuloRealimentado();
         
         moduloOUT->adicionar(novaOperacao());
         moduloOUT->processar(sinalIN);
@@ -88,7 +85,7 @@ void menu(){
         p->~PersistenciaDeModulo();
     }
 
-    delete moduloOUT;
+    moduloOUT->~Modulo();
 }
 
 Sinal* novoSinal(){
