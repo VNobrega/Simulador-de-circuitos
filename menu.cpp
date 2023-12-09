@@ -55,6 +55,9 @@ void menu(){
 
     if(escolha == 2) {
         Sinal* sinalIN = novoSinal();
+        Sinal* sinalOUT = new Sinal(0.0, 60);
+        int e;
+
         cout << "Qual estrutura de operacoes voce deseja ter como base?" << endl
         << "1) Operacoes em serie nao realimentadas" << endl
         << "2) Operacoes em paralelo nao realimentadas" << endl
@@ -67,9 +70,20 @@ void menu(){
         if(escolha == 2) moduloOUT = new ModuloEmParalelo();
         if(escolha == 3) moduloOUT = new ModuloRealimentado();
         
-        moduloOUT->adicionar(novaOperacao());
-        moduloOUT->processar(sinalIN);
-        sinalIN->imprimir("Resultado Final");
+        do{
+            moduloOUT->adicionar(novaOperacao());
+            cout << "O que voce quer fazer agora?" << endl
+            << "1) Realizar mais uma operacao no resultado" << endl
+            << "2) Imprimir o resultado" << endl
+            << "Escolha: ";
+            cin >> e;
+            cout << endl;
+        }while(e == 1);
+
+        sinalOUT = moduloOUT->processar(sinalIN);
+        sinalOUT->imprimir("Resultado Final");
+        sinalIN->~Sinal();
+        sinalOUT->~Sinal();
     }
 
     cout << "Voce gostaria de salvar o circuito em um novo arquivo?" << endl
@@ -171,17 +185,6 @@ CircuitoSISO* novaOperacao(){
         return circuito;
     }
 
+    
     return nullptr;
-    /*cout << "O que voce quer fazer agora?" << endl
-    << "1) Realizar mais uma operacao no resultado" << endl
-    << "2) Imprimir o resultado" << endl
-    << "Escolha: ";
-    cin >> escolha2;
-    cout << endl;
-
-    if(escolha2 == 1)
-        novaOperacao(sinalIN);
-    if(escolha2==2)
-        sinalIN->imprimir("Resultado Final");
-        sinalIN->~Sinal();*/
 }
